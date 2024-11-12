@@ -1,36 +1,52 @@
 <script>
-	function copyText() {
-		navigator.clipboard.writeText("Hello, world!");
-		alert("Copied to clipboard");
-	}
+	import {goto} from '$app/navigation';
 
-	function navigateToExternalApp() {
-		window.location.href = "https://www.google.com";
-	}
-
-	function downloadPDF() {
-		fetch("https://assets.website-files.com/603d0d2db8ec32ba7d44fffe/603d0e327eb2748c8ab1053f_loremipsum.pdf")
-			.then(response => response.blob())
-			.then(blob => {
-				const link = document.createElement('a');
-				link.href = URL.createObjectURL(blob);
-				link.download = 'file.pdf';
-				link.click();
-				URL.revokeObjectURL(link.href);
-			})
-			.catch(error => console.error('Error downloading the PDF:', error));
-	}
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-<div style="height: 50px;">
-	<button on:click={copyText}>Copy Text</button>
+<div class="container">
+	<button class="button-card" type="button" onclick={() => goto('/preview-1')}>
+		<p class="title">Preview 1</p>
+		<p class="subtitle">Preview ini untuk memperlihatkan step-step download dokumen dengan cara mendownload melalui icon download/print pada pdf viewer di web browser</p>
+	</button>
+	<div style="margin-top: 1rem;"></div>
+	<button class="button-card" type="button" onclick={() => goto('/preview-2')}>
+		<p class="title">Preview 2</p>
+		<p class="subtitle">Preview ini untuk memperlihatkan step-step download dokumen dengan cara meng-copy link dan langsung mendownload otomatis pdf file melalui browser</p>
+	</button>
 </div>
 
-<div style="height: 50px;">
-	<button on:click={navigateToExternalApp}>Navigate to open external app</button>
-</div>
-<div style="height: 50px;">
-	<button on:click={downloadPDF}>Download PDF</button>
-</div>
+<style>
+	p {
+		margin: 0;
+	}
+	.title{
+		font-size: 1.1rem;
+		font-weight: bold;
+	}
+	.subtitle{
+		font-size: 1rem;
+		font-weight: 500;
+	}
+	.button-card{
+		width: 90vw;
+		border: 1px solid #000;
+		border-radius: 10px;
+		padding: 0.5rem 1rem;
+		text-align: left;
+	}
+
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+	}
+
+	.button-card:hover{
+		background-color: #f98d01;
+		color: #fff;
+		cursor: pointer;
+	}
+</style>
